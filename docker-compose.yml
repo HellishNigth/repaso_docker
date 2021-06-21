@@ -1,0 +1,35 @@
+version: "3.9"
+services:
+  db:
+    container_name: db-repaso_docker
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db-data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: repaso_docker_db
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: laravel1234
+    networks:
+      - net-repaso_docker
+  web:
+    container_name: repaso_docker-web
+    depends_on:
+      - db
+    ports:
+      - "8083:80"
+    volumes:
+      - "./web:/var/www/html"
+      - "./httpd.conf:/etc/httpd/conf/httpd.conf"
+    image: laravel-php8
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - net-repaso_docker
+networks:
+  net-repaso_docker:
+    
