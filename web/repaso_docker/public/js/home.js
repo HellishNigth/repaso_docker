@@ -10,8 +10,9 @@ const cargarMarcas = async()=>{
     });     
 };
 
-cargarMarcas();
-
+document.addEventListener("DOMContentLoaded", ()=>{
+    cargarMarcas();
+});
 document.querySelector("#registrar-btn").addEventListener("click", async ()=>{
     let nombre = document.querySelector("#nombre-txt").value;
     let marca = document.querySelector("#marca-select").value;
@@ -21,5 +22,7 @@ document.querySelector("#registrar-btn").addEventListener("click", async ()=>{
     consola.marca = marca;
     consola.anio = anio;
     let res = await crearConsola(consola);
-    Swal.fire("Consola creada","Consola creada existosamente","success")
+    await Swal.fire("Consola creada","Consola creada existosamente","success")
+
+    window.location.href = "ver_consolas";
 });
