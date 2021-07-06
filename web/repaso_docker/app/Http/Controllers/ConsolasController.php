@@ -31,4 +31,12 @@ class ConsolasController extends Controller
         return $consola;
     }
 
+    public function eliminarConsola(Request $request){
+        $input = $request->all();
+        $id = $input ["id"];
+        $consola = Consola::findOrFail($id);
+        //Eleminar llamo elemento delete
+        $consola->delete();
+        return "ok";
+    }
 }
