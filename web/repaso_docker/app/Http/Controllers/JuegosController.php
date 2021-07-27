@@ -12,7 +12,7 @@ class JuegosController extends Controller
     public function getJuegosByConsola(Request $request){
         $input = $request->all();
         $idConsola = $input["idConsola"];
-        $consola = Consola::finnd($idConsola);
+        $consola = Consola::findOrFail($idConsola);
         return $consola->juegos()->get();
     }
     public function getJuegos(){
@@ -43,6 +43,6 @@ class JuegosController extends Controller
         $id = $input["id"];
         $juego = Juego::findOrFail($id);
         $juego->delete();
-        retur "ok";
+        return "ok";
     }
 }
